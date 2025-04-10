@@ -28,7 +28,7 @@
   </div>
 
   <a-scene embedded vr-mode-ui="enabled: true">
-    <a-sky color="#000"></a-sky>
+    <a-sky color="#555"></a-sky>
     <a-light type="directional" position="1 1 1"></a-light>
 
     <!-- Camera at (0,1,1) looking at center -->
@@ -39,8 +39,8 @@
     <!-- Earth Model at center -->
     <a-entity id="earth"
               gltf-model="f9g4hA.glb"
-              position="0 0 0"
-              scale="0.5 0.5 0.5">
+              scale="5 5 5"
+              material="color: #AAA">
     </a-entity>
   </a-scene>
 
