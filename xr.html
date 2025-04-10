@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Neo Argo Games - Planet Earth VR</title>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <style>
+      body { margin: 0; background: #000; }
+    </style>
+  </head>
+
+  <body>
+    <a-scene vr-mode-ui="enabled: true" embedded>
+
+      <!-- Sky background -->
+      <a-sky color="#000"></a-sky>
+
+      <!-- Lighting -->
+      <a-light type="directional" position="1 1 1"></a-light>
+
+      <!-- Your Earth Model -->
+      <a-entity gltf-model="f9g4hA.glb" position="0 1.6 -3" scale="0.5 0.5 0.5"></a-entity>
+
+    </a-scene>
+  </body>
+</html>
