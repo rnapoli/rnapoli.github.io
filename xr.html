@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <title>Neo Argo Games - Planet Earth VR</title>
   <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/ngokevin/aframe-look-at-component@master/dist/aframe-look-at-component.min.js"></script>
   <style>
     body { margin: 0; background: #000; }
     .ui {
@@ -22,53 +23,50 @@
 
 <body>
 
+<!-- UI Buttons -->
 <div class="ui">
-  <button onclick="move(0,0,-0.1)">Forward</button>
-  <button onclick="move(0,0,0.1)">Back</button>
-  <button onclick="move(-0.1,0,0)">Left</button>
-  <button onclick="move(0.1,0,0)">Right</button>
-  <button onclick="move(0,0.1,0)">Up</button>
-  <button onclick="move(0,-0.1,0)">Down</button>
-  <br>
-  <button onclick="scale(1.1)">Scale +</button>
-  <button onclick="scale(0.9)">Scale -</button>
-  <br>
-  <button onclick="reset()">Reset</button>
+  <button onclick="scaleUp()">Scale +</button>
+  <button onclick="scaleDown()">Scale -</button>
+  <button onclick="resetScale()">Reset</button>
 </div>
 
 <a-scene vr-mode-ui="enabled: true" embedded>
+
   <a-sky color="#000"></a-sky>
   <a-light type="ambient" intensity="1" color="#FFF"></a-light>
   <a-light type="directional" position="1 1 1"></a-light>
 
-  <a-entity id="earth" gltf-model="f9g4hA.glb" position="0 1.6 -2" scale="1 1 1"></a-entity>
+  <!-- Model at center -->
+  <a-entity id="earth" 
+            gltf-model="f9g4hA.glb" 
+            position="0 0 0"
+            scale="1 1 1">
+  </a-entity>
+
+  <!-- Camera at 0 1 1 pointing at model -->
+  <a-entity camera position="0 1 1" look-at="#earth"></a-entity>
+
 </a-scene>
 
 <script>
 const earth = document.querySelector('#earth');
-let pos = {x:0, y:1.6, z:-2};
 let sca = 1;
 
-function move(dx,dy,dz) {
-  pos.x += dx;
-  pos.y += dy;
-  pos.z += dz;
-  earth.setAttribute('position', `${pos.x} ${pos.y} ${pos.z}`);
-}
-
-function scale(factor) {
-  sca *= factor;
+function scaleUp() {
+  sca *= 1.1;
   earth.setAttribute('scale', `${sca} ${sca} ${sca}`);
 }
 
-function reset() {
-  pos = {x:0, y:1.6, z:-2};
+function scaleDown() {
+  sca *= 0.9;
+  earth.setAttribute('scale', `${sca} ${sca} ${sca}`);
+}
+
+function resetScale() {
   sca = 1;
-  earth.setAttribute('position', `0 1.6 -2`);
   earth.setAttribute('scale', `1 1 1`);
 }
 </script>
 
 </body>
 </html>
-
