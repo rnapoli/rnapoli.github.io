@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <title>Neo Argo Games - Planet Earth VR</title>
   <script src="aframe.min.js"></script>
+  <script src="aframe-look-at-component.min.js"></script>
   <style>
     body { margin: 0; background: #999; }
     .ui-buttons {
@@ -17,46 +18,49 @@
       margin: 5px;
       padding: 10px 20px;
       font-size: 16px;
+      background: #333;
+      color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
     }
   </style>
 </head>
 
 <body>
-  <div class="ui-buttons">
-    <button onclick="scaleUp()">Scale +</button>
-    <button onclick="scaleDown()">Scale -</button>
-  </div>
+<div class="ui-buttons">
+  <button onclick="scaleUp()">Scale +</button>
+  <button onclick="scaleDown()">Scale -</button>
+</div>
 
-  <a-scene embedded vr-mode-ui="enabled: true">
-    <a-sky color="#555"></a-sky>
-    <a-light type="directional" position="1 1 1"></a-light>
+<a-scene embedded vr-mode-ui="enabled: true">
+  <a-sky color="#555"></a-sky>
+  <a-light type="directional" position="1 1 1"></a-light>
 
-    <!-- Camera at (0,1,1) looking at center -->
-    <a-entity position="0 1 1">
-      <a-camera look-at="#earth"></a-camera>
-    </a-entity>
+  <a-entity position="0 1 1">
+    <a-camera look-at="#earth"></a-camera>
+  </a-entity>
 
-    <!-- Earth Model at center -->
-    <a-entity id="earth"
-              gltf-model="f9g4hA.glb"
-              scale="5 5 5"
-              material="color: #AAA">
-    </a-entity>
-  </a-scene>
+  <a-entity id="earth"
+            gltf-model="f9g4hA.glb"
+            scale="5 5 5"
+            material="color: #AAA">
+  </a-entity>
+</a-scene>
 
-  <script>
-    const earth = document.querySelector('#earth');
-    let currentScale = 0.5;
+<script>
+const earth = document.querySelector('#earth');
+let currentScale = 5;  // Correct value
 
-    function scaleUp() {
-      currentScale += 0.1;
-      earth.setAttribute('scale', `${currentScale} ${currentScale} ${currentScale}`);
-    }
+function scaleUp() {
+  currentScale += 0.5;
+  earth.setAttribute('scale', `${currentScale} ${currentScale} ${currentScale}`);
+}
 
-    function scaleDown() {
-      currentScale = Math.max(0.1, currentScale - 0.1);
-      earth.setAttribute('scale', `${currentScale} ${currentScale} ${currentScale}`);
-    }
-  </script>
+function scaleDown() {
+  currentScale = Math.max(0.1, currentScale - 0.5);
+  earth.setAttribute('scale', `${currentScale} ${currentScale} ${currentScale}`);
+}
+</script>
+
 </body>
 </html>
