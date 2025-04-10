@@ -1,1 +1,51 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Neo Argo Games - Planeta Terra</title></head><body><iframe src="data:text/html;base64,PCFET0NUWVBFIGh0bWw+PGh0bWwgbGFuZz0iZW4iPjxoZWFkPiAgPG1ldGEgY2hhcnNldD0iVVRGLTgiPiAgPHRpdGxlPk5lbyBBcmdvIEdhbWVzIC0gUGxhbmV0YSBUZXJyYTwvdGl0bGU+ICA8c2NyaXB0IHR5cGU9Im1vZHVsZSIgc3JjPSJodHRwczovL3VucGtnLmNvbS9AZ29vZ2xlL21vZGVsLXZpZXdlci9kaXN0L21vZGVsLXZpZXdlci5taW4uanMiPjwvc2NyaXB0PiAgPHN0eWxlPiAgICBib2R5IHsgICAgICBtYXJnaW46IDA7ICAgICAgYmFja2dyb3VuZDogIzAwMDsgICAgfSAgICBtb2RlbC12aWV3ZXIgeyAgICAgIHdpZHRoOiAxMDB2dzsgICAgICBoZWlnaHQ6IDEwMHZoOyAgICB9ICAgIC5hci1idXR0b24geyAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTsgICAgICBib3R0b206IDIwcHg7ICAgICAgbGVmdDogNTAlOyAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWCgtNTAlKTsgICAgICBiYWNrZ3JvdW5kOiAjMzM2NmZmOyAgICAgIGNvbG9yOiB3aGl0ZTsgICAgICBmb250LXNpemU6IDEuMmVtOyAgICAgIHBhZGRpbmc6IDEycHggMjRweDsgICAgICBib3JkZXI6IG5vbmU7ICAgICAgYm9yZGVyLXJhZGl1czogOHB4OyAgICAgIGN1cnNvcjogcG9pbnRlcjsgICAgfSAgPC9zdHlsZT48L2hlYWQ+PGJvZHk+ICA8bW9kZWwtdmlld2VyICAgIGlkPSJtb2RlbCIgICAgc3JjPSJmOWc0aEEuZ2xiIiAgICBpb3Mtc3JjPSJhMzJCeGYudXNkeiIgICAgYXIgICAgYXItbW9kZXM9InNjZW5lLXZpZXdlciBxdWljay1sb29rIHdlYnhyIiAgICBhdXRvLXJvdGF0ZSAgICBjYW1lcmEtY29udHJvbHMgICAgYWx0PSJFYXJ0aCBMYXllcnMgTW9kZWwiPiAgPC9tb2RlbC12aWV3ZXI+ICA8YnV0dG9uIGNsYXNzPSJhci1idXR0b24iIG9uY2xpY2s9ImRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJyNtb2RlbCcpLmFjdGl2YXRlQVIoKSI+VmlldyBpbiBBUjwvYnV0dG9uPjwvYm9keT48L2h0bWw+" style="border:0;width:100vw;height:100vh;"></iframe></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Neo Argo Games - Planeta Terra</title>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+    }
+
+    model-viewer {
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .ar-button {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #3366ff;
+      color: white;
+      font-size: 1.2em;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <model-viewer
+    id="model"
+    src="f9g4hA.glb"
+    ios-src="a32Bxf.usdz"
+    ar
+    ar-modes="scene-viewer quick-look webxr"
+    auto-rotate
+    camera-controls
+    alt="Earth Layers Model">
+  </model-viewer>
+
+  <button class="ar-button" onclick="document.querySelector('#model').activateAR()">View in AR</button>
+
+</body>
+</html>
+
