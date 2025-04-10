@@ -4,69 +4,59 @@
   <meta charset="utf-8">
   <title>Neo Argo Games - Planet Earth VR</title>
   <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/ngokevin/aframe-look-at-component@master/dist/aframe-look-at-component.min.js"></script>
   <style>
     body { margin: 0; background: #000; }
-    .ui {
-      position: fixed;
+    .ui-buttons {
+      position: absolute;
       top: 10px;
-      left: 10px;
-      background: rgba(0,0,0,0.7);
-      color: white;
-      padding: 10px;
-      font-family: sans-serif;
-      z-index: 1000;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999;
     }
-    button { margin: 2px; }
+    button {
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
   </style>
 </head>
 
 <body>
+  <div class="ui-buttons">
+    <button onclick="scaleUp()">Scale +</button>
+    <button onclick="scaleDown()">Scale -</button>
+  </div>
 
-<!-- UI Buttons -->
-<div class="ui">
-  <button onclick="scaleUp()">Scale +</button>
-  <button onclick="scaleDown()">Scale -</button>
-  <button onclick="resetScale()">Reset</button>
-</div>
+  <a-scene embedded vr-mode-ui="enabled: true">
+    <a-sky color="#000"></a-sky>
+    <a-light type="directional" position="1 1 1"></a-light>
 
-<a-scene vr-mode-ui="enabled: true" embedded>
+    <!-- Camera at (0,1,1) looking at center -->
+    <a-entity position="0 1 1">
+      <a-camera look-at="#earth"></a-camera>
+    </a-entity>
 
-  <a-sky color="#000"></a-sky>
-  <a-light type="ambient" intensity="1" color="#FFF"></a-light>
-  <a-light type="directional" position="1 1 1"></a-light>
+    <!-- Earth Model at center -->
+    <a-entity id="earth"
+              gltf-model="f9g4hA.glb"
+              position="0 0 0"
+              scale="0.5 0.5 0.5">
+    </a-entity>
+  </a-scene>
 
-  <!-- Model at center -->
-  <a-entity id="earth" 
-            gltf-model="f9g4hA.glb" 
-            position="0 0 0"
-            scale="1 1 1">
-  </a-entity>
+  <script>
+    const earth = document.querySelector('#earth');
+    let currentScale = 0.5;
 
-  <!-- Camera at 0 1 1 pointing at model -->
-  <a-entity camera position="0 1 1" look-at="#earth"></a-entity>
+    function scaleUp() {
+      currentScale += 0.1;
+      earth.setAttribute('scale', `${currentScale} ${currentScale} ${currentScale}`);
+    }
 
-</a-scene>
-
-<script>
-const earth = document.querySelector('#earth');
-let sca = 1;
-
-function scaleUp() {
-  sca *= 1.1;
-  earth.setAttribute('scale', `${sca} ${sca} ${sca}`);
-}
-
-function scaleDown() {
-  sca *= 0.9;
-  earth.setAttribute('scale', `${sca} ${sca} ${sca}`);
-}
-
-function resetScale() {
-  sca = 1;
-  earth.setAttribute('scale', `1 1 1`);
-}
-</script>
-
+    function scaleDown() {
+      currentScale = Math.max(0.1, currentScale - 0.1);
+      earth.setAttribute('scale', `${currentScale} ${currentScale} ${currentScale}`);
+    }
+  </script>
 </body>
 </html>
