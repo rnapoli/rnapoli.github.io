@@ -1,32 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Neo Argo Games - Planet Earth VR</title>
-    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-    <style>
-      body { margin: 0; background: #000; }
-    </style>
-  </head>
+<head>
+  <meta charset="utf-8">
+  <title>Neo Argo Games - Planet Earth VR</title>
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <style>
+    body { margin: 0; background: #000; }
+    .ui {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      padding: 10px;
+      font-family: sans-serif;
+      z-index: 1000;
+    }
+    button { margin: 2px; }
+  </style>
+</head>
 
-  <body>
-    <a-scene vr-mode-ui="enabled: true" embedded>
+<body>
 
-      <!-- Sky background -->
-      <a-sky color="#000"></a-sky>
+<div class="ui">
+  <button onclick="move(0,0,-0.1)">Forward</button>
+  <button onclick="move(0,0,0.1)">Back</button>
+  <button onclick="move(-0.1,0,0)">Left</button>
+  <button onclick="move(0.1,0,0)">Right</button>
+  <button onclick="move(0,0.1,0)">Up</button>
+  <button onclick="move(0,-0.1,0)">Down</button>
+  <br>
+  <button onclick="scale(1.1)">Scale +</button>
+  <button onclick="scale(0.9)">Scale -</button>
+  <br>
+  <button onclick="reset()">Reset</button>
+</div>
 
-      <!-- Lighting -->
-      <a-light type="ambient" intensity="1"></a-light>
-      <a-light type="directional" position="1 1 1"></a-light>
-      
-      <!-- Your Earth Model -->
-      <a-entity gltf-model="f9g4hA.glb"
-                position="0 1.6 -1"
-                scale="3.5 3.5 3.5">
-      </a-entity>
-    
-      <a-entity camera position="0 1.6 0"></a-entity>
+<a-scene vr-mode-ui="enabled: true" embedded>
+  <a-sky color="#000"></a-sky>
+  <a-light type="ambient" intensity="1" color="#FFF"></a-light>
+  <a-light type="directional" position="1 1 1"></a-light>
 
-    </a-scene>
-  </body>
+  <a-entity id="earth" gltf-model="f9g4hA.glb" position="0 1.6 -2" scale="1 1 1"></a-entity>
+</a-scene>
+
+<script>
+const earth = document.querySelector('#earth');
+let pos = {x:0, y:1.6, z:-2};
+let sca = 1;
+
+function move(dx,dy,dz) {
+  pos.x += dx;
+  pos.y += dy;
+  pos.z += dz;
+  earth.setAttribute('position', `${pos.x} ${pos.y} ${pos.z}`);
+}
+
+function scale(factor) {
+  sca *= factor;
+  earth.setAttribute('scale', `${sca} ${sca} ${sca}`);
+}
+
+function reset() {
+  pos = {x:0, y:1.6, z:-2};
+  sca = 1;
+  earth.setAttribute('position', `0 1.6 -2`);
+  earth.setAttribute('scale', `1 1 1`);
+}
+</script>
+
+</body>
 </html>
+
